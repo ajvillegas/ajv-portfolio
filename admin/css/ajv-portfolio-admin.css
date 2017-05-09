@@ -1,0 +1,31 @@
+/**
+ * Admin Columns
+ */
+ 
+.wp-admin.post-type-ajv_portfolio #project-image {
+	width: 15%;
+}
+
+.wp-admin.post-type-ajv_portfolio #menu-order {
+	width: 10%;
+}
+
+.wp-admin.post-type-ajv_portfolio #post-id,
+.wp-admin.taxonomy-ajv_portfolio_category #tax-id {
+	width: 8%;
+}
+
+.wp-admin.post-type-ajv_portfolio .project-image img {
+	width: 75px;
+	height: 75px;
+}
+
+@media screen and (max-width: 782px) {
+	
+	.wp-admin.post-type-ajv_portfolio #project-image,
+	.wp-admin.post-type-ajv_portfolio .project-image,
+	.wp-admin.post-type-ajv_portfolio .wp-list-table .is-expanded .project-image  {
+		display: none !important;
+	}
+	
+}
