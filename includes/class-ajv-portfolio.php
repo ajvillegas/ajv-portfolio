@@ -69,7 +69,7 @@ class AJV_Portfolio {
 	public function __construct() {
 
 		$this->plugin_name = 'ajv-portfolio';
-		$this->version = '1.0.0';
+		$this->version = '1.0.1';
 		$this->load_dependencies();
 		$this->set_locale();
 		$this->define_cpt_hooks();
@@ -180,9 +180,6 @@ class AJV_Portfolio {
 		
 		// Save meta box values
 		$this->loader->add_action( 'save_post', $plugin_metabox, 'save_meta_box_values' );
-		
-		// Filter the post title placeholder text
-		$this->loader->add_filter( 'enter_title_here', $plugin_metabox, 'custom_enter_title' );
 
 	}
 
