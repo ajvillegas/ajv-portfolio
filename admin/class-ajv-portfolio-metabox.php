@@ -61,7 +61,11 @@ class AJV_Portfolio_Metabox {
 	 */
 	public function add_portfolio_meta_boxes() {
 		
-		add_meta_box( 'ajv-portfolio-details-meta-box', __( 'Project Details', 'ajv-portfolio' ), array( $this, 'portfolio_meta_box' ), 'ajv_portfolio', 'normal', 'high' );
+		if ( apply_filters( 'ajv_portfolio_register_meta_box', true ) ) {
+		
+			add_meta_box( 'ajv-portfolio-details-meta-box', __( 'Project Details', 'ajv-portfolio' ), array( $this, 'portfolio_meta_box' ), 'ajv_portfolio', 'normal', 'high' );
+			
+		}
 		
 	}
 	
@@ -113,23 +117,6 @@ class AJV_Portfolio_Metabox {
 		if ( isset( $_POST[ '_ajv_portfolio_url' ] ) ) {
 			update_post_meta( $post_id, '_ajv_portfolio_url', esc_url( $_POST[ '_ajv_portfolio_url' ] ) );
 		}
-		
-	}
-	
-	/**
-	 * Filter the post title placeholder text.
-	 *
-	 * @since    1.0.0
-	 */
-	public function custom_enter_title( $input ) {
-		
-		global $post_type;
-
-	    if ( 'ajv_portfolio' === $post_type ) {
-	        return __( 'Enter the project name', 'ajv-portfolio' );
-	    }
-	
-	    return $input;
 		
 	}
 	
