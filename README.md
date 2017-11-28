@@ -5,8 +5,8 @@ This plugin adds a portfolio section to your website.
 **Contributors**: [ajvillegas](http://profiles.wordpress.org/ajvillegas)  
 **Tags**: [portfolio](http://wordpress.org/plugins/tags/portfolio), [admin](http://wordpress.org/plugins/tags/admin), [custom post type](http://wordpress.org/plugins/tags/custom-post-type)  
 **Requires at least**: 4.5  
-**Tested up to**: 4.8  
-**Stable tag**: 1.0.0  
+**Tested up to**: 4.9  
+**Stable tag**: 1.0.1  
 **License**: [GPLv2 or later](http://www.gnu.org/licenses/gpl-2.0.html)
 
 # Description
@@ -22,6 +22,13 @@ You can alter any of the custom post type and custom taxonomy parameters using t
 **Custom Post Meta Box**
 
 The plugin adds a custom post meta box to the portfolio editor screen that allows you to enter metadata relevant to each portfolio item.
+
+If you don't need the meta box on your website, you can remove it completely using the `ajv_portfolio_register_meta_box` filter following the example below.  
+
+```php
+// Remove AJV Portfolio custom meta box
+add_filter( 'ajv_portfolio_register_meta_box', '__return_false' );
+```
 
 To retrieve the meta box options use `get_post_meta`. The following example shows how you can implement this on your theme's template file.
 
@@ -78,6 +85,9 @@ For more information, please refer to this page: [get_post_meta()](https://devel
 ![Custom post meta box](wp-assets/screenshot-2.png?raw=true)
 
 # Changelog
+
+**1.0.1**
+* Added the `ajv_portfolio_register_meta_box` filter for removing the Project Details meta box if necessary.
 
 **1.0.0**
 * Initial release.
