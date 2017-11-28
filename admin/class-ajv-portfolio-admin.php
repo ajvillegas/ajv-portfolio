@@ -75,13 +75,20 @@ class AJV_Portfolio_Admin {
 		$columns = array(
 	        'cb'							  => '<input type="checkbox" />',
 	        'project-image'					  => __( 'Image', 'ajv-portfolio' ),
-	        'title'							  => __( 'Project', 'ajv-portfolio' ),
-	        'client'				  		  => __( 'Client', 'ajv-portfolio' ),
+	        'title'							  => __( 'Title', 'ajv-portfolio' ),
 	        'taxonomy-ajv_portfolio_category' => __( 'Categories', 'ajv-portfolio' ),
 	        'menu-order'					  => __( 'Order', 'ajv-portfolio' ),
 	        'date'							  => __( 'Date', 'ajv-portfolio' ),
 	        'post-id'						  => __( 'ID', 'ajv-portfolio' ),
 	    );
+	    
+	    // Add custom column if meta box is registered
+		if ( apply_filters( 'ajv_portfolio_register_meta_box', true ) ) {
+		    
+		    // Add key value to 4th position in the array
+		    $columns = array_slice( $columns, 0, 3, true ) + array( 'client' => __( 'Client', 'ajv-portfolio' ) ) + array_slice( $columns, 3, null, true );
+		    
+	    }
 	    
 	    return $columns;
 		
