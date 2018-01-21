@@ -13,9 +13,6 @@
 /**
  * The custom post type and taxonomy functionality of the plugin.
  *
- * Defines the plugin name, version, and two examples hooks for how to
- * enqueue the admin-specific stylesheet and JavaScript.
- *
  * @package    AJV_Portfolio
  * @subpackage AJV_Portfolio/admin
  * @author     Alexis J. Villegas <alexis@ajvillegas.com>
