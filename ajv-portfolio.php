@@ -23,6 +23,7 @@
  * License URI:       http://www.gnu.org/licenses/gpl-2.0.txt
  * Text Domain:       ajv-portfolio
  * Domain Path:       /languages
+ * GitHub Plugin URI: ajvillegas/ajv-portfolio
  */
 
 // If this file is called directly, abort.
