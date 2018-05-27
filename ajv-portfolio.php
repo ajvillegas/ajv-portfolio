@@ -16,7 +16,7 @@
  * Plugin Name:       AJV Portfolio
  * Plugin URI:        https://github.com/ajvillegas/ajv-portfolio
  * Description:       This plugin adds a portfolio section to your website.
- * Version:           1.0.1
+ * Version:           1.0.2
  * Author:            Alexis J. Villegas
  * Author URI:        http://www.alexisvillegas.com
  * License:           GPL-2.0+

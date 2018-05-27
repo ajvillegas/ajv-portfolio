@@ -69,7 +69,7 @@ class AJV_Portfolio {
 	public function __construct() {
 
 		$this->plugin_name = 'ajv-portfolio';
-		$this->version = '1.0.1';
+		$this->version = '1.0.2';
 		$this->load_dependencies();
 		$this->set_locale();
 		$this->define_cpt_hooks();
