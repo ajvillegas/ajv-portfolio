@@ -6,7 +6,7 @@ This plugin adds a portfolio section to your website.
 **Tags**: [portfolio](http://wordpress.org/plugins/tags/portfolio), [admin](http://wordpress.org/plugins/tags/admin), [custom post type](http://wordpress.org/plugins/tags/custom-post-type)  
 **Requires at least**: 4.5  
 **Tested up to**: 4.9  
-**Stable tag**: 1.0.1  
+**Stable tag**: 1.0.2  
 **License**: [GPLv2 or later](http://www.gnu.org/licenses/gpl-2.0.html)
 
 # Description
@@ -40,19 +40,20 @@ $description = get_post_meta( get_the_ID(), '_ajv_portfolio_description', true )
 $client = get_post_meta( get_the_ID(), '_ajv_portfolio_client', true );
 $company = get_post_meta( get_the_ID(), '_ajv_portfolio_company', true );
 $url = get_post_meta( get_the_ID(), '_ajv_portfolio_url', true );
+$anchor_text = get_post_meta( get_the_ID(), '_ajv_portfolio_url_text', true );
 
 ?>
 <div class="portfolio-post-meta">
     <h4><?php echo __( 'Description:', 'my-text-domain' ); ?></h4>
-    <p><?php echo $description; ?></p>
+    <p><?php echo esc_html( $description ); ?></p>
 	
     <h4><?php echo __( 'Client:', 'my-text-domain' ); ?></h4>
     <p>
-        <span class="client"><?php echo $client; ?></span>
-        <span class="company"><?php echo ', ' . $company; ?></span>
+        <span class="client"><?php echo esc_html( $client ); ?></span>
+        <span class="company"><?php echo ', ' . esc_html( $company ); ?></span>
     </p>
 	
-    <a class="button" href="<?php echo $url; ?>" target="_blank"><?php echo __( 'View Project', 'my-text-domain' ); ?></a>
+    <a class="button" href="<?php echo esc_url( $url ); ?>" target="_blank"><?php echo esc_html( anchor_text ); ?></a>
 </div>
 <?php
 ```
@@ -85,6 +86,9 @@ For more information, please refer to this page: [get_post_meta()](https://devel
 ![Custom post meta box](wp-assets/screenshot-2.png?raw=true)
 
 # Changelog
+
+**1.0.2**
+* Added the 'Link Text' field to the Project Details meta box.
 
 **1.0.1**
 * Added the `ajv_portfolio_register_meta_box` filter for removing the Project Details meta box if necessary.
