@@ -71,5 +71,19 @@
 				</p>
 			</td>
 		</tr>
+		
+		<tr valign="top">
+			<th scope="row">
+				<label for="_ajv_portfolio_url_text"><?php _e( 'Link Text', 'ajv-portfolio' ); ?></label>
+			</th>
+			<td>
+				<p>
+					<input class="widefat" type="text" name="_ajv_portfolio_url_text" id="_ajv_portfolio_url_text" value="<?php if ( isset ( $portfolio_stored_meta['_ajv_portfolio_url_text'] ) ) echo esc_attr( $portfolio_stored_meta['_ajv_portfolio_url_text'][0] ); ?>">
+				</p>
+				<p>
+					<span class="description"><em><?php _e( 'Enter the link\'s anchor text.', 'ajv-portfolio' ) ?></em></span>
+				</p>
+			</td>
+		</tr>
 	</tbody>
 </table>
