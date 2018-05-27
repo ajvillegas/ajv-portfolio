@@ -51,7 +51,7 @@ $anchor_text = get_post_meta( get_the_ID(), '_ajv_portfolio_url_text', true );
         <span class="company"><?php echo ', ' . esc_html( $company ); ?></span>
     </p>
 	
-    <a class="button" href="<?php echo esc_url( $url ); ?>" target="_blank"><?php echo esc_html( anchor_text ); ?></a>
+    <a class="button" href="<?php echo esc_url( $url ); ?>" target="_blank"><?php echo esc_html( $anchor_text ); ?></a>
 </div>
 <?php`
 
