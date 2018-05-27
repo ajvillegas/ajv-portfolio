@@ -115,6 +115,10 @@ class AJV_Portfolio_Metabox {
 			update_post_meta( $post_id, '_ajv_portfolio_url', esc_url( $_POST[ '_ajv_portfolio_url' ] ) );
 		}
 		
+		if ( isset( $_POST[ '_ajv_portfolio_url_text' ] ) ) {
+			update_post_meta( $post_id, '_ajv_portfolio_url_text', sanitize_text_field( $_POST[ '_ajv_portfolio_url_text' ] ) );
+		}
+		
 	}
 	
 }
