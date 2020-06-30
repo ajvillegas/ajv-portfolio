@@ -1,5 +1,4 @@
 <?php
-
 /**
  * The plugin bootstrap file
  *
@@ -33,14 +32,13 @@ if ( ! defined( 'WPINC' ) ) {
 
 /**
  * The code that runs during plugin activation.
- *
  */
 function activate_ajv_portfolio() {
-	
+
 	require_once plugin_dir_path( __FILE__ ) . 'admin/class-ajv-portfolio-admin.php';
-	
+
 	AJV_Portfolio_Admin::add_notice();
-	
+
 }
 
 register_activation_hook( __FILE__, 'activate_ajv_portfolio' );
@@ -58,7 +56,7 @@ require plugin_dir_path( __FILE__ ) . 'includes/class-ajv-portfolio.php';
  * then kicking off the plugin from this point in the file does
  * not affect the page life cycle.
  *
- * @since    1.0.0
+ * @since 1.0.0
  */
 function run_ajv_portfolio() {
 
