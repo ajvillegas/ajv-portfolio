@@ -1,5 +1,4 @@
 <?php
-
 /**
  * The admin-specific functionality of the plugin.
  *
@@ -24,7 +23,7 @@ class AJV_Portfolio_Admin {
 	 *
 	 * @since    1.0.0
 	 * @access   private
-	 * @var      string    $plugin_name    The ID of this plugin.
+	 * @var      string $plugin_name The ID of this plugin.
 	 */
 	private $plugin_name;
 
@@ -33,7 +32,7 @@ class AJV_Portfolio_Admin {
 	 *
 	 * @since    1.0.0
 	 * @access   private
-	 * @var      string    $version    The current version of this plugin.
+	 * @var      string $version The current version of this plugin.
 	 */
 	private $version;
 
@@ -41,13 +40,13 @@ class AJV_Portfolio_Admin {
 	 * Initialize the class and set its properties.
 	 *
 	 * @since    1.0.0
-	 * @param    string    $plugin_name		The name of this plugin.
-	 * @param    string    $version			The version of this plugin.
+	 * @param    string $plugin_name The name of this plugin.
+	 * @param    string $version     The version of this plugin.
 	 */
 	public function __construct( $plugin_name, $version ) {
 
 		$this->plugin_name = $plugin_name;
-		$this->version = $version;
+		$this->version     = $version;
 
 	}
 
@@ -66,87 +65,96 @@ class AJV_Portfolio_Admin {
 	 * Add custom post admin table columns.
 	 *
 	 * @since    1.0.0
+	 *
+	 * @param array $columns An associative array of column headings.
+	 *
+	 * @return array
 	 */
 	public function edit_admin_columns( $columns ) {
-		
+
 		$columns = array(
-	        'cb'							  => '<input type="checkbox" />',
-	        'project-image'					  => __( 'Image', 'ajv-portfolio' ),
-	        'title'							  => __( 'Title', 'ajv-portfolio' ),
-	        'taxonomy-ajv_portfolio_category' => __( 'Categories', 'ajv-portfolio' ),
-	        'menu-order'					  => __( 'Order', 'ajv-portfolio' ),
-	        'date'							  => __( 'Date', 'ajv-portfolio' ),
-	        'post-id'						  => __( 'ID', 'ajv-portfolio' ),
-	    );
-	    
-	    // Add custom column if meta box is registered
+			'cb'                              => '<input type="checkbox" />',
+			'project-image'                   => esc_html__( 'Image', 'ajv-portfolio' ),
+			'title'                           => esc_html__( 'Title', 'ajv-portfolio' ),
+			'taxonomy-ajv_portfolio_category' => esc_html__( 'Categories', 'ajv-portfolio' ),
+			'menu-order'                      => esc_html__( 'Order', 'ajv-portfolio' ),
+			'date'                            => esc_html__( 'Date', 'ajv-portfolio' ),
+			'post-id'                         => esc_html__( 'ID', 'ajv-portfolio' ),
+		);
+
+		// Add custom column if meta box is registered.
 		if ( apply_filters( 'ajv_portfolio_register_meta_box', true ) ) {
-		    
-		    // Add key value to 4th position in the array
-		    $columns = array_slice( $columns, 0, 3, true ) + array( 'client' => __( 'Client', 'ajv-portfolio' ) ) + array_slice( $columns, 3, null, true );
-		    
-	    }
-	    
-	    return $columns;
-		
+
+			// Add key value to 4th position in the array.
+			$columns = array_slice( $columns, 0, 3, true ) + array( 'client' => __( 'Client', 'ajv-portfolio' ) ) + array_slice( $columns, 3, null, true );
+
+		}
+
+		return $columns;
+
 	}
-	
+
 	/**
-	 * Add cotent to custom post admin table columns.
+	 * Add content to custom post admin table columns.
 	 *
 	 * @since    1.0.0
+	 *
+	 * @param string $column The name of the column to display.
+	 * @param int    $post_id The current post ID.
 	 */
 	public function define_admin_columns( $column, $post_id ) {
-		
+
 		global $post;
-		
-		// Get post meta
-		$width = (int) 150;
-		$height = (int) 150;
+
+		// Get post meta.
+		$width    = (int) 150;
+		$height   = (int) 150;
 		$image_id = get_post_meta( $post_id, '_thumbnail_id', true );
-		$image = wp_get_attachment_image( $image_id, array( $width, $height ), false );
-		$client = get_post_meta( $post_id, '_ajv_portfolio_client', true );
-		$company = get_post_meta( $post_id, '_ajv_portfolio_company', true );
-		
+		$image    = wp_get_attachment_image( $image_id, array( $width, $height ), false );
+		$client   = get_post_meta( $post_id, '_ajv_portfolio_client', true );
+		$company  = get_post_meta( $post_id, '_ajv_portfolio_company', true );
+
 		switch ( $column ) {
-			
-			// Image column
+
+			// Image column.
 			case 'project-image':
-				if ( has_post_thumbnail( $post_id ) )
-					echo $image;
-				else
-					echo '<img src="' . plugin_dir_url( __FILE__ ) . 'images/default-image.svg" class="default-project-image" alt="default project image">';
+				if ( has_post_thumbnail( $post_id ) ) {
+					echo wp_kses_post( $image );
+				} else {
+					echo '<img src="' . esc_url( plugin_dir_url( __FILE__ ) ) . 'images/default-image.svg" class="default-project-image" alt="default project image">';
+				}
 				break;
-				
-			// Client column
+
+			// Client column.
 			case 'client':
-				if ( $client && $company )
-					echo $client . ' - ' . $company;
-				elseif ( $client && !$company )
-					echo $client;
-				elseif ( !$client && $company )
-					echo $company;
-				else
+				if ( $client && $company ) {
+					echo esc_html( $client . ' - ' . $company );
+				} elseif ( $client && ! $company ) {
+					echo esc_html( $client );
+				} elseif ( ! $client && $company ) {
+					echo esc_html( $company );
+				} else {
 					echo '—';
+				}
 				break;
-			
-			// Order column
+
+			// Order column.
 			case 'menu-order':
-				echo $post->menu_order;
+				echo absint( $post->menu_order );
 				break;
-				
-			// ID column
+
+			// ID column.
 			case 'post-id':
-				echo $post_id;
+				echo absint( $post_id );
 				break;
-				
+
 			default:
 				break;
-				
+
 		}
-		
+
 	}
-	
+
 	/**
 	 * Make custom post admin table columns sortable.
 	 *
@@ -154,69 +162,83 @@ class AJV_Portfolio_Admin {
 	 * order the column sorts when it's first clicked.
 	 *
 	 * @since    1.0.0
+	 *
+	 * @param array $columns An associative array of column headings.
+	 *
+	 * @return array
 	 */
 	public function sortable_admin_columns( $columns ) {
-		
-		// Order column
+
+		// Order column.
 		$columns['menu-order'] = array( 'menu_order', 0 );
-		
+
 		return $columns;
-		
+
 	}
-	
+
 	/**
 	 * Add custom taxonomy admin table columns.
 	 *
 	 * @since    1.0.0
+	 *
+	 * @param array $columns An associative array of column headings.
+	 *
+	 * @return array
 	 */
 	public function edit_admin_tax_columns( $columns ) {
-		
+
 		$columns = array(
-	        'cb'		  => '<input type="checkbox" />',
-	        'name'		  => __( 'Name', 'ajv-portfolio' ),
-	        'description' => __( 'Description', 'ajv-portfolio' ),
-	        'slug'		  => __( 'Slug', 'ajv-portfolio' ),
-	        'posts'		  => __( 'Count', 'ajv-portfolio' ),
-	        'tax-id'	  => __( 'ID', 'ajv-portfolio' ),
-	    );
-	    
-	    return $columns;
-		
+			'cb'          => '<input type="checkbox" />',
+			'name'        => __( 'Name', 'ajv-portfolio' ),
+			'description' => __( 'Description', 'ajv-portfolio' ),
+			'slug'        => __( 'Slug', 'ajv-portfolio' ),
+			'posts'       => __( 'Count', 'ajv-portfolio' ),
+			'tax-id'      => __( 'ID', 'ajv-portfolio' ),
+		);
+
+		return $columns;
+
 	}
-	
+
 	/**
-	 * Add cotent to custom taxonomy admin table columns.
+	 * Add content to custom taxonomy admin table columns.
 	 *
 	 * @since    1.0.0
+	 *
+	 * @param string $value Blank string.
+	 * @param string $name  The name of the column.
+	 * @param int    $id    The taxonomy term ID.
 	 */
 	public function define_admin_tax_columns( $value, $name, $id ) {
-		
-		// Display taxonomy ID
+
+		// Display taxonomy ID.
 		return 'tax-id' === $name ? $id : $value;
-		
+
 	}
-	
+
 	/**
 	 * Add activation admin notice.
 	 *
 	 * @since    1.0.0
 	 */
 	public function admin_notice() {
-		
-		if ( $notices = get_option( 'ajv_portfolio_admin_notices' ) ) {
-			
+
+		$notices = get_option( 'ajv_portfolio_admin_notices' );
+
+		if ( $notices ) {
+
 			foreach ( $notices as $notice ) {
-				
-				echo $notice;
-				
+
+				echo wp_kses_post( $notice );
+
 			}
-			
+
 			delete_option( 'ajv_portfolio_admin_notices' );
-			
+
 		}
-		
+
 	}
-	
+
 	/**
 	 * Define admin notices and add them to a temporary plugin option.
 	 *
@@ -224,14 +246,15 @@ class AJV_Portfolio_Admin {
 	 */
 	public static function add_notice() {
 
-	    $notices = get_option( 'ajv_portfolio_admin_notices', array() );
-	    
-	    $url_text = __( 'click here to update your permalinks', 'ajv-portfolio' );
-	    
-	    $notices[] = '<div class="notice notice-warning is-dismissible"><p>' . sprintf( __( 'Please %s and complete the portfolio post type registration.', 'ajv-portfolio' ), '<a href="' . admin_url( 'options-permalink.php' ) . '"><strong>' . $url_text . '</strong></a>' ) . '</p></div>';
-	    
-	    update_option( 'ajv_portfolio_admin_notices', $notices );
-	
+		$notices = get_option( 'ajv_portfolio_admin_notices', array() );
+
+		$url_text = esc_html__( 'click here to update your permalinks', 'ajv-portfolio' );
+
+		// translators: %s: permalinks admin page URL.
+		$notices[] = '<div class="notice notice-warning is-dismissible"><p>' . sprintf( esc_html__( 'Please %s and complete the portfolio post type registration.', 'ajv-portfolio' ), '<a href="' . admin_url( 'options-permalink.php' ) . '"><strong>' . $url_text . '</strong></a>' ) . '</p></div>';
+
+		update_option( 'ajv_portfolio_admin_notices', $notices );
+
 	}
 
 }
