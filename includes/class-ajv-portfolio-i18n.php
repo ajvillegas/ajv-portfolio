@@ -1,5 +1,4 @@
 <?php
-
 /**
  * Define the internationalization functionality
  *
@@ -24,7 +23,7 @@
  * @subpackage AJV_Portfolio/includes
  * @author     Alexis J. Villegas <alexis@ajvillegas.com>
  */
-class AJV_Portfolio_i18n {
+class AJV_Portfolio_I18n {
 
 	/**
 	 * Load the plugin text domain for translation.
