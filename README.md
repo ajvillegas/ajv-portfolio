@@ -9,17 +9,17 @@ This plugin adds a portfolio section to your website.
 **Stable tag**: 1.0.2  
 **License**: [GPLv2 or later](http://www.gnu.org/licenses/gpl-2.0.html)
 
-# Description
+## Description
 
 This plugin adds a portfolio section to your website by registering a new 'Portfolio' custom post type and custom taxonomy for categorizing portfolio items.
 
-**Custom Post Type Parameters**
+### Custom Post Type Parameters
 
 You can alter any of the custom post type and custom taxonomy parameters using the `ajv_portfolio_post_type_filter` and the `ajv_portfolio_taxonomy_filter` respectively. For a look at the plugin's default parameters, please refer to the `AJV_Portfolio_CPT` class under `ajv-portfolio/admin/class-ajv-portfolio-cpt.php`.
 
 **Note:** If you update the rewrite parameter with these filters, make sure to also update your permalinks by visiting the permalinks settings page.
 
-**Custom Post Meta Box**
+### Custom Post Meta Box
 
 The plugin adds a custom post meta box to the portfolio editor screen that allows you to enter metadata relevant to each portfolio item.
 
@@ -46,13 +46,13 @@ $anchor_text = get_post_meta( get_the_ID(), '_ajv_portfolio_url_text', true );
 <div class="portfolio-post-meta">
     <h4><?php echo __( 'Description:', 'my-text-domain' ); ?></h4>
     <p><?php echo esc_html( $description ); ?></p>
-	
+
     <h4><?php echo __( 'Client:', 'my-text-domain' ); ?></h4>
     <p>
         <span class="client"><?php echo esc_html( $client ); ?></span>
         <span class="company"><?php echo ', ' . esc_html( $company ); ?></span>
     </p>
-	
+
     <a class="button" href="<?php echo esc_url( $url ); ?>" target="_blank"><?php echo esc_html( $anchor_text ); ?></a>
 </div>
 <?php
@@ -60,38 +60,39 @@ $anchor_text = get_post_meta( get_the_ID(), '_ajv_portfolio_url_text', true );
 
 For more information, please refer to this page: [get_post_meta()](https://developer.wordpress.org/reference/functions/get_post_meta/).
 
-# Installation
+## Installation
 
-**Using The WordPress Dashboard**
+### Using The WordPress Dashboard
 
 1. Navigate to the 'Add New' Plugin Dashboard
 2. Click on 'Upload Plugin' and select `ajv-portfolio.zip` from your computer
 3. Click on 'Install Now'
 4. Activate the plugin on the WordPress Plugins Dashboard
 
-**Using FTP**
+### Using FTP
 
 1. Extract `ajv-portfolio.zip` to your computer
 2. Upload the `ajv-portfolio` directory to your `wp-content/plugins` directory
 3. Activate the plugin on the WordPress Plugins Dashboard
 
-# Screenshots
+## Screenshots
 
-*Admin table view*
-
+*Admin table view*  
 ![Admin table view](wp-assets/screenshot-1.png?raw=true)
 
-*Custom post meta box*
-
+*Custom post meta box*  
 ![Custom post meta box](wp-assets/screenshot-2.png?raw=true)
 
-# Changelog
+## Changelog
 
-**1.0.2**
+### 1.0.2
+
 * Added the 'Link Text' field to the Project Details meta box.
 
-**1.0.1**
+### 1.0.1
+
 * Added the `ajv_portfolio_register_meta_box` filter for removing the Project Details meta box if necessary.
 
-**1.0.0**
+### 1.0.0
+
 * Initial release.
