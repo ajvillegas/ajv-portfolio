@@ -1,5 +1,4 @@
 <?php
-
 /**
  * The file that defines the core plugin class
  *
@@ -33,27 +32,27 @@ class AJV_Portfolio {
 	 * The loader that's responsible for maintaining and registering all hooks that power
 	 * the plugin.
 	 *
-	 * @since    1.0.0
-	 * @access   protected
-	 * @var      AJV_Portfolio_Loader    $loader    Maintains and registers all hooks for the plugin.
+	 * @since  1.0.0
+	 * @access protected
+	 * @var    AJV_Portfolio_Loader $loader Maintains and registers all hooks for the plugin.
 	 */
 	protected $loader;
 
 	/**
 	 * The unique identifier of this plugin.
 	 *
-	 * @since    1.0.0
-	 * @access   protected
-	 * @var      string    $plugin_name    The string used to uniquely identify this plugin.
+	 * @since  1.0.0
+	 * @access protected
+	 * @var    string $plugin_name The string used to uniquely identify this plugin.
 	 */
 	protected $plugin_name;
 
 	/**
 	 * The current version of the plugin.
 	 *
-	 * @since    1.0.0
-	 * @access   protected
-	 * @var      string    $version    The current version of the plugin.
+	 * @since  1.0.0
+	 * @access protected
+	 * @var    string $version The current version of the plugin.
 	 */
 	protected $version;
 
@@ -69,7 +68,7 @@ class AJV_Portfolio {
 	public function __construct() {
 
 		$this->plugin_name = 'ajv-portfolio';
-		$this->version = '1.0.2';
+		$this->version     = '1.0.2';
 		$this->load_dependencies();
 		$this->set_locale();
 		$this->define_cpt_hooks();
@@ -92,8 +91,8 @@ class AJV_Portfolio {
 	 * Create an instance of the loader which will be used to register the hooks
 	 * with WordPress.
 	 *
-	 * @since    1.0.0
-	 * @access   private
+	 * @since 1.0.0
+	 * @access private
 	 */
 	private function load_dependencies() {
 
@@ -108,12 +107,12 @@ class AJV_Portfolio {
 		 * of the plugin.
 		 */
 		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/class-ajv-portfolio-i18n.php';
-		
+
 		/**
 		 * The class responsible for defining all actions for registering custom post types and taxonomies.
 		 */
 		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/class-ajv-portfolio-cpt.php';
-		
+
 		/**
 		 * The class responsible for defining all actions related to the meta box functionality.
 		 */
@@ -144,7 +143,7 @@ class AJV_Portfolio {
 		$this->loader->add_action( 'plugins_loaded', $plugin_i18n, 'load_plugin_textdomain' );
 
 	}
-	
+
 	/**
 	 * Register all of the hooks related to the custom post type functionality
 	 * of the plugin.
@@ -156,14 +155,14 @@ class AJV_Portfolio {
 
 		$plugin_cpt = new AJV_Portfolio_CPT( $this->get_plugin_name(), $this->get_version() );
 
-		// Register custom post type
+		// Register custom post type.
 		$this->loader->add_action( 'init', $plugin_cpt, 'custom_post_type' );
-		
-		// Register custom taxonomy
+
+		// Register custom taxonomy.
 		$this->loader->add_action( 'init', $plugin_cpt, 'custom_taxonomy' );
 
 	}
-	
+
 	/**
 	 * Register all of the hooks related to the custom meta box functionality
 	 * of the plugin.
@@ -174,11 +173,11 @@ class AJV_Portfolio {
 	private function define_metabox_hooks() {
 
 		$plugin_metabox = new AJV_Portfolio_Metabox( $this->get_plugin_name(), $this->get_version() );
-		
-		// Register custom post meta box
+
+		// Register custom post meta box.
 		$this->loader->add_action( 'add_meta_boxes_ajv_portfolio', $plugin_metabox, 'add_portfolio_meta_boxes' );
-		
-		// Save meta box values
+
+		// Save meta box values.
 		$this->loader->add_action( 'save_post', $plugin_metabox, 'save_meta_box_values' );
 
 	}
@@ -193,28 +192,28 @@ class AJV_Portfolio {
 	private function define_admin_hooks() {
 
 		$plugin_admin = new AJV_Portfolio_Admin( $this->get_plugin_name(), $this->get_version() );
-		
-		// Enqueue styles
+
+		// Enqueue styles.
 		$this->loader->add_action( 'admin_enqueue_scripts', $plugin_admin, 'enqueue_styles' );
-		
-		// Add custom post admin table columns
+
+		// Add custom post admin table columns.
 		$this->loader->add_filter( 'manage_ajv_portfolio_posts_columns', $plugin_admin, 'edit_admin_columns' );
-		
-		// Add cotent to custom post admin table columns
+
+		// Add content to custom post admin table columns.
 		$this->loader->add_action( 'manage_ajv_portfolio_posts_custom_column', $plugin_admin, 'define_admin_columns', 10, 2 );
-		
-		// Make custom post admin table columns sortable
+
+		// Make custom post admin table columns sortable.
 		$this->loader->add_action( 'manage_edit-ajv_portfolio_sortable_columns', $plugin_admin, 'sortable_admin_columns' );
-		
-		// Add custom taxonomy admin table columns
+
+		// Add custom taxonomy admin table columns.
 		$this->loader->add_filter( 'manage_edit-ajv_portfolio_category_columns', $plugin_admin, 'edit_admin_tax_columns' );
-		
-		// Add cotent to custom taxonomy admin table columns
+
+		// Add content to custom taxonomy admin table columns.
 		$this->loader->add_action( 'manage_ajv_portfolio_category_custom_column', $plugin_admin, 'define_admin_tax_columns', 10, 3 );
-		
-		// Add activation admin notice
+
+		// Add activation admin notice.
 		$this->loader->add_action( 'admin_notices', $plugin_admin, 'admin_notice' );
-		
+
 	}
 
 	/**
