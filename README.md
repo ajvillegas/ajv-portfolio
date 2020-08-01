@@ -5,7 +5,7 @@ This plugin adds a portfolio section to your website.
 **Contributors**: [ajvillegas](http://profiles.wordpress.org/ajvillegas)  
 **Tags**: [portfolio](http://wordpress.org/plugins/tags/portfolio), [admin](http://wordpress.org/plugins/tags/admin), [custom post type](http://wordpress.org/plugins/tags/custom-post-type)  
 **Requires at least**: 4.5  
-**Tested up to**: 4.9  
+**Tested up to**: 5.5  
 **Stable tag**: 1.0.2  
 **License**: [GPLv2 or later](http://www.gnu.org/licenses/gpl-2.0.html)
 

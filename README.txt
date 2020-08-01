@@ -3,7 +3,7 @@ Contributors: ajvillegas
 Donate link:
 Tags: portfolio, admin, custom post type
 Requires at least: 4.5
-Tested up to: 4.9
+Tested up to: 5.5
 Stable tag: 1.0.2
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
@@ -24,7 +24,7 @@ You can alter any of the custom post type and custom taxonomy parameters using t
 
 The plugin adds a custom post meta box to the portfolio editor screen that allows you to enter metadata relevant to each portfolio item.
 
-If you don't need the meta box on your website, you can remove it completely using the `ajv_portfolio_register_meta_box` filter following the example below.  
+If you don't need the meta box on your website, you can remove it completely using the `ajv_portfolio_register_meta_box` filter following the example below.
 
 `// Remove AJV Portfolio custom meta box
 add_filter( 'ajv_portfolio_register_meta_box', '__return_false' );`
@@ -44,13 +44,13 @@ $anchor_text = get_post_meta( get_the_ID(), '_ajv_portfolio_url_text', true );
 <div class="portfolio-post-meta">
     <h4><?php echo __( 'Description:', 'my-text-domain' ); ?></h4>
     <p><?php echo esc_html( $description ); ?></p>
-	
+
     <h4><?php echo __( 'Client:', 'my-text-domain' ); ?></h4>
     <p>
         <span class="client"><?php echo esc_html( $client ); ?></span>
         <span class="company"><?php echo ', ' . esc_html( $company ); ?></span>
     </p>
-	
+
     <a class="button" href="<?php echo esc_url( $url ); ?>" target="_blank"><?php echo esc_html( $anchor_text ); ?></a>
 </div>
 <?php`
